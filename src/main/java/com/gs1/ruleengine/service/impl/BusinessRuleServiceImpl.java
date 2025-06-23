@@ -8,6 +8,8 @@ import com.gs1.ruleengine.service.BusinessRuleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Business rule services provider
  *
@@ -35,5 +37,15 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     @Override
     public BusinessRule create(final BusinessRuleDTO dto) {
         return businessRuleRepository.save(businessRuleMapper.toEntity(dto));
+    }
+
+    /**
+     * Read all the business rules service
+     *
+     * @return List of business rules
+     */
+    @Override
+    public List<BusinessRule> readAll() {
+        return businessRuleRepository.findAll();
     }
 }

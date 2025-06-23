@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Business rule RestFul APIs
  *
@@ -31,7 +33,17 @@ public class BusinessRuleController {
     private final BusinessRuleMapper businessRuleMapper;
 
     /**
-     * Create business rule
+     * Read all the business rules API
+     *
+     * @return List of business rules
+     */
+    @GetMapping
+    public ApiResponse<List<BusinessRule>> readAll() {
+        return ApiResponse.ok(businessRuleService.readAll());
+    }
+
+    /**
+     * Create business rule API
      *
      * @param request Business rule creation request
      * @return Created business rule ID
