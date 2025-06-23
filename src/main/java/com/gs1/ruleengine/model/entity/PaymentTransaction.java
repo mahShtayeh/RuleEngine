@@ -1,6 +1,7 @@
 package com.gs1.ruleengine.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -30,27 +31,33 @@ public class PaymentTransaction {
     /**
      * Transaction direction [inbound, outbound]
      */
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Direction direction;
 
     /**
      * Transaction amount
      */
+    @Column(nullable = false)
+    @Positive(message = "NEGATIVE_AMOUNT")
     private BigDecimal amount;
 
     /**
      * Transaction amount's currency
      */
+    @Column(nullable = false)
     private String currency;
 
     /**
      * Transaction source account
      */
+    @Column(nullable = false)
     private String sourceAccount;
 
     /**
      * Transaction target account
      */
+    @Column(nullable = false)
     private String destinationAccount;
 
     /**
