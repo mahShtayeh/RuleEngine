@@ -32,4 +32,13 @@ public interface BusinessRuleService {
      * @return A specific business rule
      */
     BusinessRule read(Long ruleId);
+
+    /**
+     * Update business rule service
+     *
+     * @param ruleId The business rule to update
+     * @param dto    Business rule DTO
+     * @return Updated business rule
+     */
+    BusinessRule update(Long ruleId, BusinessRuleDTO dto);
 }

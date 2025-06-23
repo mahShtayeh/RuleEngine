@@ -16,7 +16,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRuleRequest {
+public class BusinessRuleRequest {
     /**
      * Rule's name
      */

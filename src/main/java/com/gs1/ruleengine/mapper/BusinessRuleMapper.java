@@ -2,8 +2,9 @@ package com.gs1.ruleengine.mapper;
 
 import com.gs1.ruleengine.model.dto.BusinessRuleDTO;
 import com.gs1.ruleengine.model.entity.BusinessRule;
-import com.gs1.ruleengine.model.payload.rule.CreateRuleRequest;
+import com.gs1.ruleengine.model.payload.rule.BusinessRuleRequest;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 /**
  * Business rule POJOs mapper
@@ -18,7 +19,7 @@ public interface BusinessRuleMapper {
      * @param request Business rule request
      * @return Business rule DTO
      */
-    BusinessRuleDTO toDTO(CreateRuleRequest request);
+    BusinessRuleDTO toDTO(BusinessRuleRequest request);
 
     /**
      * Map rule type name to Enum value
@@ -38,4 +39,12 @@ public interface BusinessRuleMapper {
      * @return Business rule entity
      */
     BusinessRule toEntity(BusinessRuleDTO dto);
+
+    /**
+     * Update passed in business rule by the DTO attributes
+     *
+     * @param businessRule Target business rule
+     * @param dto          Business rule DTO holding the properties
+     */
+    void updateEntity(@MappingTarget BusinessRule businessRule, BusinessRuleDTO dto);
 }

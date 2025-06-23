@@ -3,7 +3,7 @@ package com.gs1.ruleengine.controller;
 import com.gs1.ruleengine.mapper.BusinessRuleMapper;
 import com.gs1.ruleengine.model.entity.BusinessRule;
 import com.gs1.ruleengine.model.payload.ApiResponse;
-import com.gs1.ruleengine.model.payload.rule.CreateRuleRequest;
+import com.gs1.ruleengine.model.payload.rule.BusinessRuleRequest;
 import com.gs1.ruleengine.model.payload.rule.CreateRuleResponse;
 import com.gs1.ruleengine.service.BusinessRuleService;
 import jakarta.validation.Valid;
@@ -33,6 +33,21 @@ public class BusinessRuleController {
     private final BusinessRuleMapper businessRuleMapper;
 
     /**
+     * Create business rule API
+     *
+     * @param request Business rule creation request
+     * @return Created business rule ID
+     */
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<CreateRuleResponse> create(@Valid @RequestBody final BusinessRuleRequest request) {
+        final BusinessRule businessRule = businessRuleService.create(businessRuleMapper.toDTO(request));
+        return ApiResponse.ok(CreateRuleResponse.builder()
+                .businessRuleID(businessRule.getId())
+                .build());
+    }
+
+    /**
      * Read a specific business rule API
      *
      * @return The specified business rule
@@ -53,17 +68,15 @@ public class BusinessRuleController {
     }
 
     /**
-     * Create business rule API
+     * Update specific business rule
      *
-     * @param request Business rule creation request
-     * @return Created business rule ID
+     * @param ruleId The business rule to update
+     * @param request Business rule update request
+     * @return Updated business rule
      */
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse<CreateRuleResponse> create(@Valid @RequestBody final CreateRuleRequest request) {
-        final BusinessRule businessRule = businessRuleService.create(businessRuleMapper.toDTO(request));
-        return ApiResponse.ok(CreateRuleResponse.builder()
-                .businessRuleID(businessRule.getId())
-                .build());
+    @PutMapping("{ruleId}")
+    public ApiResponse<BusinessRule> update(@PathVariable final Long ruleId,
+                                            @Valid @RequestBody final BusinessRuleRequest request) {
+        return ApiResponse.ok(businessRuleService.update(ruleId, businessRuleMapper.toDTO(request)));
     }
 }

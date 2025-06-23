@@ -60,4 +60,20 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
         return businessRuleRepository.findById(ruleId)
                 .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
     }
+
+    /**
+     * Update business rule service
+     *
+     * @param ruleId The business rule to update
+     * @param dto    Business rule DTO
+     * @return Updated business rule
+     */
+    @Override
+    public BusinessRule update(final Long ruleId, final BusinessRuleDTO dto) {
+        final BusinessRule businessRule = businessRuleRepository.findById(ruleId)
+                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
+
+        businessRuleMapper.updateEntity(businessRule, dto);
+        return businessRuleRepository.save(businessRule);
+    }
 }
