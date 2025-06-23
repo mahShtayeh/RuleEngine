@@ -79,4 +79,15 @@ public class BusinessRuleController {
                                             @Valid @RequestBody final BusinessRuleRequest request) {
         return ApiResponse.ok(businessRuleService.update(ruleId, businessRuleMapper.toDTO(request)));
     }
+
+    /**
+     * Delete a specific business rule
+     *
+     * @param ruleId Business rule ID to delete
+     */
+    @DeleteMapping("{ruleId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable final Long ruleId) {
+        businessRuleService.delete(ruleId);
+    }
 }

@@ -41,4 +41,11 @@ public interface BusinessRuleService {
      * @return Updated business rule
      */
     BusinessRule update(Long ruleId, BusinessRuleDTO dto);
+
+    /**
+     * Delete business rule by ID
+     *
+     * @param ruleId Business rule ID to delete
+     */
+    void delete(Long ruleId);
 }

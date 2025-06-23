@@ -76,4 +76,14 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
         businessRuleMapper.updateEntity(businessRule, dto);
         return businessRuleRepository.save(businessRule);
     }
+
+    /**
+     * Delete business rule by ID
+     *
+     * @param ruleId Business rule ID to delete
+     */
+    @Override
+    public void delete(final Long ruleId) {
+        businessRuleRepository.deleteById(ruleId);
+    }
 }
