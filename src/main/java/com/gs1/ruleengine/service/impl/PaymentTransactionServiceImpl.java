@@ -38,4 +38,14 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
     public PaymentTransaction create(final PaymentTransactionDTO dto) {
         return transactionRepository.save(transactionMapper.toEntity(dto));
     }
+
+    /**
+     * Delete a specific transaction
+     *
+     * @param transactionId Transaction to delete
+     */
+    @Override
+    public void delete(final Long transactionId) {
+        transactionRepository.deleteById(transactionId);
+    }
 }

@@ -44,4 +44,15 @@ public class PaymentTransactionController {
                 .transactionId(transaction.getId())
                 .build());
     }
+
+    /**
+     * Delete a specific payment transaction
+     *
+     * @param transactionId Transaction to delete
+     */
+    @DeleteMapping("{transactionId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable final Long transactionId) {
+        transactionService.delete(transactionId);
+    }
 }

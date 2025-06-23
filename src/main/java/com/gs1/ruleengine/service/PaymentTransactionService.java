@@ -16,4 +16,11 @@ public interface PaymentTransactionService {
      * @return Created payment transaction entity
      */
     PaymentTransaction create(PaymentTransactionDTO dto);
+
+    /**
+     * Delete a specific transaction
+     *
+     * @param transactionId Transaction to delete
+     */
+    void delete(Long transactionId);
 }
