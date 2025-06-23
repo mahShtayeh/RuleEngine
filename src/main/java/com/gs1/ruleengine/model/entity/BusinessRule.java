@@ -3,6 +3,10 @@ package com.gs1.ruleengine.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 /**
  * Business Rule Entity
  *
@@ -57,8 +61,46 @@ public class BusinessRule {
      *
      * @author Mahmoud Shtayeh
      */
+    @Getter
+    @RequiredArgsConstructor
     public enum RuleType {
-        ENRICHMENT,
-        ROUTING
+        ENRICHMENT("Enrichment"),
+        ROUTING("Routing");
+
+        /**
+         * Rule type name - Enum map
+         */
+        private static final Map<String, RuleType> LOOKUP = new HashMap<>();
+
+        /**
+         * Rule type name
+         */
+        private final String name;
+
+        static {
+            for (final RuleType ruleType : values()) {
+                LOOKUP.put(ruleType.getName(), ruleType);
+            }
+        }
+
+        /**
+         * Map Rule type based on the passed name
+         *
+         * @param ruleName Rule type name
+         * @return Rule type Enum
+         */
+        public static Optional<RuleType> getByName(final String ruleName) {
+            return Optional.ofNullable(LOOKUP.get(ruleName));
+        }
+
+        /**
+         * Represent a rule type using its name
+         *
+         * @return Rule type name
+         */
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }

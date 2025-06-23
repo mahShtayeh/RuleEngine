@@ -1,0 +1,50 @@
+package com.gs1.ruleengine.model.payload.rule;
+
+import com.gs1.ruleengine.model.entity.BusinessRule;
+import com.gs1.ruleengine.validator.annotation.EnumValue;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+/**
+ * Business rule creation request
+ *
+ * @author Mahmoud Shtayeh
+ */
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateRuleRequest {
+    /**
+     * Rule's name
+     */
+    @NotEmpty(message = "MISSING_OR_EMPTY_NAME")
+    private String name;
+
+    /**
+     * Rule type [ENRICHMENT, ROUTING]
+     */
+    @NotEmpty(message = "MISSING_OR_EMPTY_TYPE")
+    @EnumValue(enumClass = BusinessRule.RuleType.class, message = "INVALID_RULE_TYPE")
+    private String ruleType;
+
+    /**
+     * Rule condition expression
+     */
+    @NotEmpty(message = "MISSING_OR_EMPTY_CONDITION")
+    private String condition;
+
+    /**
+     * Rule action expression
+     */
+    @NotEmpty(message = "MISSING_OR_EMPTY_ACTION")
+    private String action;
+
+    /**
+     * Rule priority
+     */
+    @NotNull(message = "MISSING_PRIORITY")
+    private Integer priority;
+}

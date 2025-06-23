@@ -17,5 +17,5 @@ public class CreateTransactionResponse {
     /**
      * Created transaction ID
      */
-    private Long transactionId;
+    private Long transactionID;
 }

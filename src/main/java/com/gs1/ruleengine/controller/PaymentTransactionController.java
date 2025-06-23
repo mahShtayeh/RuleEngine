@@ -41,7 +41,7 @@ public class PaymentTransactionController {
     public ApiResponse<CreateTransactionResponse> create(@Valid @RequestBody final CreateTransactionRequest request) {
         final PaymentTransaction transaction = transactionService.create(transactionMapper.toDTO(request));
         return ApiResponse.ok(CreateTransactionResponse.builder()
-                .transactionId(transaction.getId())
+                .transactionID(transaction.getId())
                 .build());
     }
 

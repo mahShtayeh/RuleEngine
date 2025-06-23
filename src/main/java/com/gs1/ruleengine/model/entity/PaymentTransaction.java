@@ -68,7 +68,8 @@ public class PaymentTransaction {
     @Getter
     @RequiredArgsConstructor
     public enum Direction {
-        INBOUND("inbound"), OUTBOUND("outbound");
+        INBOUND("inbound"),
+        OUTBOUND("outbound");
 
         /**
          * Directions name - Enum map
