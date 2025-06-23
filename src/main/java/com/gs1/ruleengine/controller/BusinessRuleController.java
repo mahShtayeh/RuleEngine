@@ -33,6 +33,16 @@ public class BusinessRuleController {
     private final BusinessRuleMapper businessRuleMapper;
 
     /**
+     * Read a specific business rule API
+     *
+     * @return The specified business rule
+     */
+    @GetMapping("{ruleId}")
+    public ApiResponse<BusinessRule> read(@PathVariable final Long ruleId) {
+        return ApiResponse.ok(businessRuleService.read(ruleId));
+    }
+
+    /**
      * Read all the business rules API
      *
      * @return List of business rules
@@ -53,7 +63,7 @@ public class BusinessRuleController {
     public ApiResponse<CreateRuleResponse> create(@Valid @RequestBody final CreateRuleRequest request) {
         final BusinessRule businessRule = businessRuleService.create(businessRuleMapper.toDTO(request));
         return ApiResponse.ok(CreateRuleResponse.builder()
-                        .businessRuleID(businessRule.getId())
+                .businessRuleID(businessRule.getId())
                 .build());
     }
 }

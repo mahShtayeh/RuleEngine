@@ -25,4 +25,11 @@ public interface BusinessRuleService {
      * @return List of business rules
      */
     List<BusinessRule> readAll();
+
+    /**
+     * Read a specific business rule service
+     *
+     * @return A specific business rule
+     */
+    BusinessRule read(Long ruleId);
 }

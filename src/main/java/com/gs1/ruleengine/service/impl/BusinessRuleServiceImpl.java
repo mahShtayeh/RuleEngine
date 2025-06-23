@@ -1,5 +1,6 @@
 package com.gs1.ruleengine.service.impl;
 
+import com.gs1.ruleengine.exception.RecordNotFoundException;
 import com.gs1.ruleengine.mapper.BusinessRuleMapper;
 import com.gs1.ruleengine.model.dto.BusinessRuleDTO;
 import com.gs1.ruleengine.model.entity.BusinessRule;
@@ -47,5 +48,16 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     @Override
     public List<BusinessRule> readAll() {
         return businessRuleRepository.findAll();
+    }
+
+    /**
+     * Read a specific business rule service
+     *
+     * @return A specific business rule
+     */
+    @Override
+    public BusinessRule read(final Long ruleId) {
+        return businessRuleRepository.findById(ruleId)
+                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
     }
 }
