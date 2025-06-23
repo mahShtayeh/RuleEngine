@@ -4,3 +4,16 @@ server:
 spring:
   application:
     name: RuleEngine
+
+  datasource:
+    username: gs1
+    password: P@ssw0rd
+    url: jdbc:postgresql://localhost:5433/ruleengine
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true

@@ -1,12 +1,12 @@
 package com.gs1.ruleengine.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Payment Transaction ORM mapped Entity
@@ -30,6 +30,7 @@ public class PaymentTransaction {
     /**
      * Transaction direction [inbound, outbound]
      */
+    @Enumerated(EnumType.STRING)
     private Direction direction;
 
     /**
@@ -57,7 +58,45 @@ public class PaymentTransaction {
      *
      * @author Mahmoud Shtayeh
      */
+    @Getter
+    @RequiredArgsConstructor
     public enum Direction {
-        INBOUND, OUTBOUND
+        INBOUND("inbound"), OUTBOUND("outbound");
+
+        /**
+         * Directions name - Enum map
+         */
+        private static final Map<String, Direction> LOOKUP = new HashMap<>();
+
+        /**
+         * Direction name
+         */
+        private final String name;
+
+        static {
+            for (final Direction direction : values()) {
+                LOOKUP.put(direction.getName(), direction);
+            }
+        }
+
+        /**
+         * Map Direction based on the passed name
+         *
+         * @param name Direction name
+         * @return Direction Enum
+         */
+        public static Optional<Direction> getByName(final String name) {
+            return Optional.ofNullable(LOOKUP.get(name));
+        }
+
+        /**
+         * Represent a direction using its name
+         *
+         * @return Direction name
+         */
+        @Override
+        public String toString() {
+            return this.name;
+        }
     }
 }
