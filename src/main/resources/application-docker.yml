@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: gs1
+    password: P@ssw0rd
+    url: jdbc:postgresql://postgres:5432/ruleengine
+  jpa:
+    hibernate:
+      ddl-auto: 'create-drop'
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
