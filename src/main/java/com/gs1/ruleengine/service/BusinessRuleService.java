@@ -2,6 +2,8 @@ package com.gs1.ruleengine.service;
 
 import com.gs1.ruleengine.model.dto.BusinessRuleDTO;
 import com.gs1.ruleengine.model.entity.BusinessRule;
+import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  *
  * @author Mahmoud Shtayeh
  */
+@Transactional
 public interface BusinessRuleService {
     /**
      * Create business rule
@@ -24,13 +27,24 @@ public interface BusinessRuleService {
      *
      * @return List of business rules
      */
+    @Transactional(readOnly = true)
     List<BusinessRule> readAll();
+
+    /**
+     * Read all the business rules service, sorted as passed in
+     *
+     * @param sort Rules sorter
+     * @return List of business rules
+     */
+    @Transactional(readOnly = true)
+    List<BusinessRule> readAllSorted(Sort sort);
 
     /**
      * Read a specific business rule service
      *
      * @return A specific business rule
      */
+    @Transactional(readOnly = true)
     BusinessRule read(Long ruleId);
 
     /**

@@ -1,7 +1,6 @@
 package com.gs1.ruleengine.model.payload.rule;
 
 import com.gs1.ruleengine.model.entity.BusinessRule;
-import com.gs1.ruleengine.validator.annotation.EnumValue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -26,9 +25,8 @@ public class BusinessRuleRequest {
     /**
      * Rule type [ENRICHMENT, ROUTING]
      */
-    @NotEmpty(message = "MISSING_OR_EMPTY_TYPE")
-    @EnumValue(enumClass = BusinessRule.RuleType.class, message = "INVALID_RULE_TYPE")
-    private String ruleType;
+    @NotNull(message = "MISSING_TYPE")
+    private BusinessRule.RuleType ruleType;
 
     /**
      * Rule condition expression

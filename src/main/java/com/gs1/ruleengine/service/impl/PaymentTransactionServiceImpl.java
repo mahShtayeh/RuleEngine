@@ -1,13 +1,14 @@
 package com.gs1.ruleengine.service.impl;
 
+import com.gs1.ruleengine.model.exception.RecordNotFoundException;
 import com.gs1.ruleengine.mapper.PaymentTransactionMapper;
 import com.gs1.ruleengine.model.dto.PaymentTransactionDTO;
 import com.gs1.ruleengine.model.entity.PaymentTransaction;
 import com.gs1.ruleengine.repository.PaymentTransactionRepository;
 import com.gs1.ruleengine.service.PaymentTransactionService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Payment transaction services interface
@@ -37,6 +38,29 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
     @Override
     public PaymentTransaction create(final PaymentTransactionDTO dto) {
         return transactionRepository.save(transactionMapper.toEntity(dto));
+    }
+
+    /**
+     * Read payment transaction by ID
+     *
+     * @param transactionId Transaction ID to read
+     * @return Found payment transaction
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public PaymentTransaction read(Long transactionId) {
+        return transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new RecordNotFoundException("TRANSACTION_NOT_FOUND"));
+    }
+
+    /**
+     * Save passed in entity
+     *
+     * @param paymentTransaction Transaction to save
+     */
+    @Override
+    public void save(PaymentTransaction paymentTransaction) {
+        transactionRepository.save(paymentTransaction);
     }
 
     /**

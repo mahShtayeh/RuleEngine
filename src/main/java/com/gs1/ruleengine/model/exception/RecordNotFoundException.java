@@ -1,4 +1,4 @@
-package com.gs1.ruleengine.exception;
+package com.gs1.ruleengine.model.exception;
 
 import java.io.Serial;
 

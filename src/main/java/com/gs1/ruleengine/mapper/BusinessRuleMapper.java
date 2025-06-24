@@ -22,17 +22,6 @@ public interface BusinessRuleMapper {
     BusinessRuleDTO toDTO(BusinessRuleRequest request);
 
     /**
-     * Map rule type name to Enum value
-     *
-     * @param ruleName Rule type name
-     * @return Rule type Enum
-     */
-    default BusinessRule.RuleType toRuleType(final String ruleName) {
-        return BusinessRule.RuleType.getByName(ruleName)
-                .orElseThrow(() -> new IllegalArgumentException("INVALID_ENUM_VALUE"));
-    }
-
-    /**
      * Map business rule DTO to entity
      *
      * @param dto Business rule DTO

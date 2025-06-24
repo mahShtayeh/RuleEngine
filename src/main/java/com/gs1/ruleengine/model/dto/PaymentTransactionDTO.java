@@ -1,6 +1,5 @@
 package com.gs1.ruleengine.model.dto;
 
-import com.gs1.ruleengine.model.entity.PaymentTransaction;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -20,7 +19,7 @@ public class PaymentTransactionDTO {
     /**
      * Transaction direction [inbound, outbound]
      */
-    private PaymentTransaction.Direction direction;
+    private String direction;
 
     /**
      * Transaction amount

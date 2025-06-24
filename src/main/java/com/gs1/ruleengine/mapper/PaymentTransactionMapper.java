@@ -21,17 +21,6 @@ public interface PaymentTransactionMapper {
     PaymentTransactionDTO toDTO(CreateTransactionRequest creationRequest);
 
     /**
-     * Map direction name to Enum value
-     *
-     * @param name Direction name
-     * @return Direction Enum
-     */
-    default PaymentTransaction.Direction toDirection(final String name) {
-        return PaymentTransaction.Direction.getByName(name)
-                .orElseThrow(() -> new IllegalArgumentException("INVALID_ENUM_VALUE"));
-    }
-
-    /**
      * Map payment transaction DTO to an entity
      *
      * @param dto Payment transaction DTO

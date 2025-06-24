@@ -1,13 +1,15 @@
 package com.gs1.ruleengine.service.impl;
 
-import com.gs1.ruleengine.exception.RecordNotFoundException;
+import com.gs1.ruleengine.model.exception.RecordNotFoundException;
 import com.gs1.ruleengine.mapper.BusinessRuleMapper;
 import com.gs1.ruleengine.model.dto.BusinessRuleDTO;
 import com.gs1.ruleengine.model.entity.BusinessRule;
 import com.gs1.ruleengine.repository.BusinessRuleRepository;
 import com.gs1.ruleengine.service.BusinessRuleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
  *
  * @author Mahmoud Shtayeh
  */
+@Transactional
 @RequiredArgsConstructor
 @Service("businessRuleService")
 public class BusinessRuleServiceImpl implements BusinessRuleService {
@@ -46,8 +49,21 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
      * @return List of business rules
      */
     @Override
+    @Transactional(readOnly = true)
     public List<BusinessRule> readAll() {
         return businessRuleRepository.findAll();
+    }
+
+    /**
+     * Read all the business rules service, sorted as passed in
+     *
+     * @param sort Rules sorter
+     * @return List of business rules
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<BusinessRule> readAllSorted(Sort sort) {
+        return businessRuleRepository.findAll(sort);
     }
 
     /**
@@ -56,6 +72,7 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
      * @return A specific business rule
      */
     @Override
+    @Transactional(readOnly = true)
     public BusinessRule read(final Long ruleId) {
         return businessRuleRepository.findById(ruleId)
                 .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));

@@ -5,9 +5,6 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Payment Transaction ORM mapped Entity
@@ -32,8 +29,7 @@ public class PaymentTransaction {
      * Transaction direction [inbound, outbound]
      */
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Direction direction;
+    private String direction;
 
     /**
      * Transaction amount
@@ -72,30 +68,9 @@ public class PaymentTransaction {
         OUTBOUND("outbound");
 
         /**
-         * Directions name - Enum map
-         */
-        private static final Map<String, Direction> LOOKUP = new HashMap<>();
-
-        /**
          * Direction name
          */
         private final String name;
-
-        static {
-            for (final Direction direction : values()) {
-                LOOKUP.put(direction.getName(), direction);
-            }
-        }
-
-        /**
-         * Map Direction based on the passed name
-         *
-         * @param name Direction name
-         * @return Direction Enum
-         */
-        public static Optional<Direction> getByName(final String name) {
-            return Optional.ofNullable(LOOKUP.get(name));
-        }
 
         /**
          * Represent a direction using its name

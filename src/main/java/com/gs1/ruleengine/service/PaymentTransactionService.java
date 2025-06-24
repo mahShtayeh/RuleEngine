@@ -18,6 +18,21 @@ public interface PaymentTransactionService {
     PaymentTransaction create(PaymentTransactionDTO dto);
 
     /**
+     * Read payment transaction by ID
+     *
+     * @param transactionId Transaction ID to read
+     * @return Found payment transaction
+     */
+    PaymentTransaction read(Long transactionId);
+
+    /**
+     * Save passed in entity
+     *
+     * @param paymentTransaction Transaction to save
+     */
+    void save(PaymentTransaction paymentTransaction);
+
+    /**
      * Delete a specific transaction
      *
      * @param transactionId Transaction to delete
