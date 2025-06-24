@@ -1,5 +1,6 @@
 package com.gs1.ruleengine.service.impl;
 
+import com.gs1.ruleengine.model.exception.ErrorKey;
 import com.gs1.ruleengine.model.exception.RecordNotFoundException;
 import com.gs1.ruleengine.mapper.PaymentTransactionMapper;
 import com.gs1.ruleengine.model.dto.PaymentTransactionDTO;
@@ -50,7 +51,7 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
     @Transactional(readOnly = true)
     public PaymentTransaction read(final Long transactionId) {
         return transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RecordNotFoundException("TRANSACTION_NOT_FOUND"));
+                .orElseThrow(() -> new RecordNotFoundException(ErrorKey.TRANSACTION_NOT_FOUND));
     }
 
     /**
@@ -70,8 +71,8 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
      */
     @Override
     public void delete(final Long transactionId) {
-        PaymentTransaction transaction = transactionRepository.findById(transactionId)
-                .orElseThrow(() -> new RecordNotFoundException("TRANSACTION_NOT_FOUND"));
+        final PaymentTransaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new RecordNotFoundException(ErrorKey.TRANSACTION_NOT_FOUND));
 
         transactionRepository.delete(transaction);
     }

@@ -1,5 +1,6 @@
 package com.gs1.ruleengine.service.impl;
 
+import com.gs1.ruleengine.model.exception.ErrorKey;
 import com.gs1.ruleengine.model.exception.RecordNotFoundException;
 import com.gs1.ruleengine.mapper.BusinessRuleMapper;
 import com.gs1.ruleengine.model.dto.BusinessRuleDTO;
@@ -75,7 +76,7 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     @Transactional(readOnly = true)
     public BusinessRule read(final Long ruleId) {
         return businessRuleRepository.findById(ruleId)
-                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
+                .orElseThrow(() -> new RecordNotFoundException(ErrorKey.BUSINESS_RULE_NOT_FOUND));
     }
 
     /**
@@ -88,7 +89,7 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     @Override
     public BusinessRule update(final Long ruleId, final BusinessRuleDTO dto) {
         final BusinessRule businessRule = businessRuleRepository.findById(ruleId)
-                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
+                .orElseThrow(() -> new RecordNotFoundException(ErrorKey.BUSINESS_RULE_NOT_FOUND));
 
         businessRuleMapper.updateEntity(businessRule, dto);
         return businessRuleRepository.save(businessRule);
@@ -102,7 +103,7 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     @Override
     public void delete(final Long ruleId) {
         final BusinessRule businessRule = businessRuleRepository.findById(ruleId)
-                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
+                .orElseThrow(() -> new RecordNotFoundException(ErrorKey.BUSINESS_RULE_NOT_FOUND));
 
         businessRuleRepository.delete(businessRule);
     }

@@ -14,9 +14,9 @@ public class RecordNotFoundException extends RuntimeException {
     /**
      * Create exception using a passed in message
      *
-     * @param message Exception message
+     * @param message Exception message error key
      */
-    public RecordNotFoundException(final String message) {
-        super(message);
+    public RecordNotFoundException(final ErrorKey message) {
+        super(message.name());
     }
 }
