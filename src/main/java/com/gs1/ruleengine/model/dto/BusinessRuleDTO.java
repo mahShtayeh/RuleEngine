@@ -38,4 +38,9 @@ public class BusinessRuleDTO {
      * Rule priority
      */
     private Integer priority;
+
+    /**
+     * If rule is enabled flag
+     */
+    private Boolean enabled;
 }

@@ -44,4 +44,17 @@ public class ApiResponse<P> {
                 .payload(payload)
                 .build();
     }
+
+    /**
+     * Convenient method to create a response of a single error
+     *
+     * @param error Rest API error
+     * @param <T>   Payload type
+     * @return Rest API response
+     */
+    public static <T> ApiResponse<T> error(final ApiError error) {
+        return ApiResponse.<T>builder()
+                .errors(List.of(error))
+                .build();
+    }
 }

@@ -14,7 +14,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class BusinessRule {
+public class BusinessRule extends Auditable {
     /**
      * DB generated ID
      */
@@ -51,6 +51,13 @@ public class BusinessRule {
      * Rule priority
      */
     private Integer priority;
+
+    /**
+     * If rule is enabled flag
+     * Default true
+     */
+    @Column(name = "IS_ENABLED")
+    private Boolean enabled = true;
 
     /**
      * Possible rule types

@@ -62,7 +62,7 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<BusinessRule> readAllSorted(Sort sort) {
+    public List<BusinessRule> readAllSorted(final Sort sort) {
         return businessRuleRepository.findAll(sort);
     }
 
@@ -101,6 +101,9 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
      */
     @Override
     public void delete(final Long ruleId) {
-        businessRuleRepository.deleteById(ruleId);
+        final BusinessRule businessRule = businessRuleRepository.findById(ruleId)
+                .orElseThrow(() -> new RecordNotFoundException("BUSINESS_RULE_NOT_FOUND"));
+
+        businessRuleRepository.delete(businessRule);
     }
 }

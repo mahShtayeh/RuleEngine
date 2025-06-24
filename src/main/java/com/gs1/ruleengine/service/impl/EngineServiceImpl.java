@@ -25,8 +25,14 @@ import java.util.stream.Collectors;
 @Service("engineService")
 @RequiredArgsConstructor
 public class EngineServiceImpl implements EngineService {
+    /**
+     * Business rules services provider
+     */
     private final BusinessRuleService businessRuleService;
 
+    /**
+     * Payment transactions services provider
+     */
     private final PaymentTransactionService paymentTransactionService;
 
     /**
@@ -65,7 +71,9 @@ public class EngineServiceImpl implements EngineService {
                     });
         }
 
-        paymentTransactionService.save(transaction);
+        if (!appliedRulesNames.isEmpty()) {
+            paymentTransactionService.save(transaction);
+        }
         return EngineResponse.builder()
                 .transaction(transaction)
                 .appliedRules(appliedRulesNames)

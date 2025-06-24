@@ -45,4 +45,9 @@ public class BusinessRuleRequest {
      */
     @NotNull(message = "MISSING_PRIORITY")
     private Integer priority;
+
+    /**
+     * If rule is enabled flag
+     */
+    private Boolean enabled;
 }

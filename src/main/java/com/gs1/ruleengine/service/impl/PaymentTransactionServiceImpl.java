@@ -48,7 +48,7 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
      */
     @Override
     @Transactional(readOnly = true)
-    public PaymentTransaction read(Long transactionId) {
+    public PaymentTransaction read(final Long transactionId) {
         return transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new RecordNotFoundException("TRANSACTION_NOT_FOUND"));
     }
@@ -59,7 +59,7 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
      * @param paymentTransaction Transaction to save
      */
     @Override
-    public void save(PaymentTransaction paymentTransaction) {
+    public void save(final PaymentTransaction paymentTransaction) {
         transactionRepository.save(paymentTransaction);
     }
 
@@ -70,6 +70,9 @@ public class PaymentTransactionServiceImpl implements PaymentTransactionService 
      */
     @Override
     public void delete(final Long transactionId) {
-        transactionRepository.deleteById(transactionId);
+        PaymentTransaction transaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new RecordNotFoundException("TRANSACTION_NOT_FOUND"));
+
+        transactionRepository.delete(transaction);
     }
 }

@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class PaymentTransaction {
+public class PaymentTransaction extends Auditable {
     /**
      * DB generated ID
      */
