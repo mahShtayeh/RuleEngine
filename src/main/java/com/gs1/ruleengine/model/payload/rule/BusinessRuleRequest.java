@@ -12,6 +12,7 @@ import lombok.*;
  */
 @Getter
 @Setter
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,5 +50,6 @@ public class BusinessRuleRequest {
     /**
      * If rule is enabled flag
      */
-    private Boolean enabled;
+    @Builder.Default
+    private Boolean enabled = true;
 }

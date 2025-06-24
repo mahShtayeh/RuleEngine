@@ -37,7 +37,7 @@ public interface BusinessRuleService {
      * @return List of business rules
      */
     @Transactional(readOnly = true)
-    List<BusinessRule> readAllSorted(Sort sort);
+    List<BusinessRule> readAllEnabledSorted(Sort sort);
 
     /**
      * Read a specific business rule service

@@ -47,7 +47,7 @@ public class EngineServiceImpl implements EngineService {
         final PaymentTransaction transaction = paymentTransactionService.read(transactionId);
 
         final Map<BusinessRule.RuleType, List<BusinessRule>> rulesMap = businessRuleService
-                .readAllSorted(Sort.by(BusinessRule_.PRIORITY).descending())
+                .readAllEnabledSorted(Sort.by(BusinessRule_.PRIORITY).descending())
                 .stream()
                 .collect(Collectors.groupingBy(BusinessRule::getRuleType));
 

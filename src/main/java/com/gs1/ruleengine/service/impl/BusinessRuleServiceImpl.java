@@ -56,15 +56,15 @@ public class BusinessRuleServiceImpl implements BusinessRuleService {
     }
 
     /**
-     * Read all the business rules service, sorted as passed in
+     * Read all the enabled business rules service, sorted as passed in
      *
      * @param sort Rules sorter
      * @return List of business rules
      */
     @Override
     @Transactional(readOnly = true)
-    public List<BusinessRule> readAllSorted(final Sort sort) {
-        return businessRuleRepository.findAll(sort);
+    public List<BusinessRule> readAllEnabledSorted(final Sort sort) {
+        return businessRuleRepository.findAllByEnabledTrue(sort);
     }
 
     /**
